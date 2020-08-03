@@ -34,7 +34,7 @@ docker pull ababino85/frcnn_endpoint:latest
 
 To run the container execute:
 ```bash
-docker run -p 4020:4020 --gpus all --env-file ./env.list -v $(pwd)/models:/models ababino/frcnn_api:latest
+docker run -p 4020:4020 --gpus all --env-file ./env.list -v $(pwd)/models:/models ababino85/frcnn_endpoint:latest
 ```
 
 To test the server you can use any image and curl:
