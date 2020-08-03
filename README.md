@@ -17,6 +17,7 @@ If you want to use the GPU got to [nvidia-docker](https://github.com/NVIDIA/nvid
 Clone this repository and go to the new folder:
 ```bash
 git clone git@github.com:ababino/frcnn_endpoint.git
+cd frcnn_endpoint
 ```
 
 To use the default parameters (Faster R-CNN ResNet101 trained on the COCO dataset) download the model using the script:
