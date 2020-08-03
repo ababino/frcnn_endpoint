@@ -46,7 +46,7 @@ docker run -p 4020:4020 --gpus all --env-file ./env.list -v $(pwd)/models:/model
 To test the server you can use any image and curl:
 
 ```bash
-curl -i -X POST 127.0.0.1/frcnn/  -F "image=@path_to_image/image.png"
+curl -i -X POST  http://localhost:4020/frcnn/  -F "image=@test_image.png"
 ```
 
 
