@@ -26,6 +26,11 @@ bash ./frcnn_model.sh
 cd ..
 ```
 
+Build
+```bash
+docker build -t youruser/frcnn_api .
+```
+
 pull the image from docker hub:
 ```bash
 
