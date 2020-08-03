@@ -24,14 +24,9 @@ To use the default parameters (Faster R-CNN ResNet101 trained on the COCO datase
 bash ./frcnn_model.sh
 ```
 
-Build
-```bash
-docker build -t youruser/frcnn_api .
-```
-
 pull the image from docker hub:
 ```bash
-
+docker pull ababino85/frcnn_endpoint:latest
 ```
 
 ## Running
