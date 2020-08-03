@@ -21,9 +21,7 @@ git clone git@github.com:ababino/frcnn_endpoint.git
 
 To use the default parameters (Faster R-CNN ResNet101 trained on the COCO dataset) download the model using the script:
 ```bash
-cd models
 bash ./frcnn_model.sh
-cd ..
 ```
 
 Build
