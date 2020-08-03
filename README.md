@@ -20,12 +20,13 @@ git clone git@github.com:ababino/frcnn_endpoint.git
 cd frcnn_endpoint
 ```
 
-To use the default parameters (Faster R-CNN ResNet101 trained on the COCO dataset) download the model using the script:
+To use the default parameters ([Faster R-CNN ResNet101 trained on the COCO dataset](https://github.com/ababino/pytorch_faster_rcnn_resnet101)) download the model using the script:
 ```bash
 bash ./frcnn_model.sh
 ```
+If you want to use any other model (such as Mask-RCNN), you will have to download it and update the environmental variables in the `env.list` file.
 
-pull the image from docker hub:
+Pull the image from docker hub:
 ```bash
 docker pull ababino85/frcnn_endpoint:latest
 ```
