@@ -1,10 +1,14 @@
-FROM nvidia/cuda:10.1-cudnn7-devel
+FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu18.04
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get install -y \
-        python3-opencv ca-certificates python3-dev git wget sudo  \
-        cmake ninja-build protobuf-compiler libprotobuf-dev && \
-  rm -rf /var/lib/apt/lists/*
+RUN mv /etc/apt/sources.list.d/cuda.list /etc/apt/sources.list.d/cuda.bkp 
+RUN mv /etc/apt/sources.list.d/nvidia-ml.list /etc/apt/sources.list.d/nvidia-ml.bkp 
+RUN apt-get update
+RUN apt-get install -y python3-opencv ca-certificates python3-dev git wget sudo
+RUN apt-get install -y cmake ninja-build protobuf-compiler libprotobuf-dev
+RUN mv /etc/apt/sources.list.d/cuda.bkp /etc/apt/sources.list.d/cuda.list 
+RUN mv /etc/apt/sources.list.d/nvidia-ml.bkp /etc/apt/sources.list.d/nvidia-ml.list
+RUN rm -rf /var/lib/apt/lists/*
 RUN ln -sv /usr/bin/python3 /usr/bin/python
 
 # create a non-root user
@@ -15,14 +19,14 @@ USER appuser
 WORKDIR /home/appuser
 
 ENV PATH="/home/appuser/.local/bin:${PATH}"
-RUN wget https://bootstrap.pypa.io/get-pip.py && \
+RUN wget https://bootstrap.pypa.io/pip/3.6/get-pip.py && \
         python3 get-pip.py --user && \
         rm get-pip.py
 
 # install dependencies
 # See https://pytorch.org/ for other options if you use a different version of CUDA
 RUN pip install --user tensorboard
-RUN pip install --user torch==1.6 torchvision==0.7 -f https://download.pytorch.org/whl/cu101/torch_stable.html
+RUN pip install --user torch==1.8 torchvision==0.9 -f https://download.pytorch.org/whl/cu101/torch_stable.html
 
 RUN pip install --user 'git+https://github.com/facebookresearch/fvcore'
 # install detectron2
@@ -46,5 +50,3 @@ COPY apis/ apis/
 EXPOSE 4020
 
 CMD ["gunicorn", "--bind", "0.0.0.0:4020",  "app:app"]
-
-
