@@ -31,17 +31,19 @@ device = int(os.getenv('GPU_DEVICE'))
 logger.info('Loading model')
 backbone = resnet_fpn_backbone(os.getenv('BACKBONE'), False)
 model = FasterRCNN(backbone, len(categories))
-if device>=0:
-    state_dict = torch.load(os.getenv('MODEL_PATH'))
-else:
-    state_dict = torch.load(os.getenv('MODEL_PATH'), map_location='cpu')
-model.load_state_dict(state_dict['model'])
-if device>=0:
-    model.to(device);
-model.eval();
+if os.getenv('MODEL_PATH'):
+    if device>=0:
+        state_dict = torch.load(os.getenv('MODEL_PATH'))
+    else:
+        state_dict = torch.load(os.getenv('MODEL_PATH'), map_location='cpu')
+    model.load_state_dict(state_dict['model'])
+    if device>=0:
+        model.to(device);
+    model.eval();
+
 logger.info('Model ready')
 
-logger.info('Loading detecton model')
+logger.info('Loading detectron model')
 cfg = get_cfg()
 if os.getenv('DETECTRON_CONFIG'):
     cfg.merge_from_file(os.getenv('DETECTRON_CONFIG'))
