@@ -48,7 +48,7 @@ cfg = get_cfg()
 if os.getenv('DETECTRON_CONFIG'):
     cfg.merge_from_file(os.getenv('DETECTRON_CONFIG'))
     cfg.MODEL.WEIGHTS = os.getenv('DETECTRON_MODEL')
-else:
+elif os.getenv('DETECTRON_ZOO_CONFIG'):
     cfg.merge_from_file(model_zoo.get_config_file(os.getenv('DETECTRON_ZOO_CONFIG')))
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(os.getenv('DETECTRON_ZOO_CONFIG'))
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set threshold for this model
