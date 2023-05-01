@@ -1,4 +1,4 @@
-Flask==1.1.2
+Flask==2.3.2
 Flask-Cors==3.0.9
 flask-restplus==0.13.0
 gunicorn==19.10.0
